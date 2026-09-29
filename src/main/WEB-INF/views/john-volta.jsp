@@ -36,6 +36,26 @@
         .description {
             color: #4b5563;
         }
+        .navigation {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+}
+
+.navigation a {
+    padding: 10px 16px;
+    border-radius: 8px;
+    background: #2563eb;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.navigation a:hover {
+    background: #1d4ed8;
+}
 
         form {
             margin-top: 24px;
@@ -134,7 +154,15 @@
         Jam kerja normal:
         <strong>${salaryProperties.normalHours} jam</strong>
     </p>
+    <nav class="navigation">
+    <a href="${pageContext.request.contextPath}/john-volta">
+        Kalkulator Gaji
+    </a>
 
+    <a href="${pageContext.request.contextPath}/persamaan-kuadrat">
+        Persamaan Kuadrat
+    </a>
+</nav>
     <form action="${pageContext.request.contextPath}/john-volta"
           method="post">
 

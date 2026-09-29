@@ -36,3 +36,167 @@ Seoranga karyawan bernama john travolta bergaji mingguan. Gaji normal seminggu (
 1) Bila Mr. John travolta pada minggu ini bekerja 52 jam, berapa gaji mr. John tersebut. Buat alogaritma + program menghitung gaji dengan nilai-nilai yang lain/variatif: (“bebas”).
 2) Bila pemasukan lebih besar dari pengeluaran maka, akan ditulis (di print), ”bisa menabung”. Bila pemasukan sama dengan pengeluaran maka, akan ditulis (di print), ”tidak bisa menabung”. Bila pemasukan sama kurang dari pengeluaran maka, akan ditulis (di print), ”cari tambahan”.
 pengeluaran mr. john selama seminggu ini adalah rp. 600.000. Apakah Mr. john bisa menabung atau tidak ??. bila bisa, berapa besar tabungannya untuk minggu ini. Buat alogaritma + program menghitung tabungan minggu ini dengan nilai-nilai yang lain/variatif (“bebas”).
+
+## Teknologi yang digunakan
+
+* Java 25
+* Spring Boot
+* Spring MVC
+* JSP
+* Maven
+* YAML untuk konfigurasi aplikasi
+
+## Cara Menjalankan Aplikasi
+
+### Prasyarat
+
+Pastikan perangkat sudah memiliki:
+
+* Java Development Kit (JDK) 25 atau versi yang sesuai dengan konfigurasi `pom.xml`.
+* Apache Maven 3.9 atau versi lebih baru.
+* Git, jika repository ingin di-*clone* dari GitHub.
+
+Periksa instalasi Java dan Maven dengan perintah berikut:
+
+```bash
+java --version
+mvn --version
+```
+
+### Clone repository
+
+```bash
+git clone https://github.com/5P-ADSE-Kelompok-9/UTS-Bayangan.git
+cd UTS-Bayangan
+```
+
+### Jalankan aplikasi dengan Maven
+
+Pada Linux atau macOS:
+
+```bash
+mvn clean spring-boot:run
+```
+
+Pada Windows:
+
+```powershell
+mvn clean spring-boot:run
+```
+
+Jika project memiliki Maven Wrapper, perintah berikut juga dapat digunakan:
+
+Linux atau macOS:
+
+```bash
+./mvnw clean spring-boot:run
+```
+
+Windows:
+
+```powershell
+mvnw.cmd clean spring-boot:run
+```
+
+### Buka aplikasi di browser
+
+Setelah aplikasi berhasil dijalankan, buka alamat berikut:
+
+```text
+http://localhost:8080/
+```
+
+atau:
+
+```text
+http://localhost:8080/john-volta
+```
+
+### Contoh input
+
+```text
+Employee name       : John Travolta
+Hours worked        : 52
+Weekly expenses     : 600.00
+```
+
+Dengan konfigurasi default pada `src/main/resources/application.yaml`:
+
+```yaml
+app:
+  salary:
+    normal-hours: 40
+    hourly-rate: 15.00
+    overtime-multiplier: 1.5
+    default-expenses: 600.00
+```
+
+Hasil perhitungan:
+
+```text
+Regular salary      : $600.00
+Overtime salary     : $270.00
+Total income        : $870.00
+Weekly expenses     : $600.00
+Saving status       : Can save money
+Remaining balance   : $270.00
+```
+
+### Mengubah konfigurasi gaji
+
+Nilai jam normal, upah per jam, pengali lembur, dan pengeluaran default dapat diubah melalui file:
+
+```text
+src/main/resources/application.yaml
+```
+
+Contoh:
+
+```yaml
+app:
+  salary:
+    normal-hours: 40
+    hourly-rate: 20.00
+    overtime-multiplier: 1.5
+    default-expenses: 750.00
+```
+
+Setelah mengubah file YAML, hentikan dan jalankan kembali aplikasi agar konfigurasi terbaru digunakan.
+
+### Membuat file WAR
+
+Untuk membuat file deployment WAR, jalankan:
+
+```bash
+mvn clean package
+```
+
+File hasil build dapat ditemukan di:
+
+```text
+target/uts-bayangan.war
+```
+
+### Menjalankan test
+
+Jika test sudah tersedia, jalankan dengan:
+
+```bash
+mvn test
+```
+
+### Menghentikan aplikasi
+
+Tekan kombinasi tombol berikut pada terminal:
+
+```text
+Ctrl + C
+```
+
+## Catatan
+
+* Nilai uang menggunakan USD dan ditampilkan dengan dua angka desimal, misalnya `$15.00`.
+* Jam lembur dihitung untuk jam kerja di atas 40 jam.
+* Jika total pemasukan lebih besar dari pengeluaran, status yang ditampilkan adalah `Can save money`.
+* Jika total pemasukan sama dengan atau lebih kecil dari pengeluaran, status yang ditampilkan adalah `Cannot save money`.
+* Pastikan port `8080` tidak sedang digunakan oleh aplikasi lain.
