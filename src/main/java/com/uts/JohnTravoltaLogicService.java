@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class JohnTravoltaLogicService {
 
+    private static final int MONEY_SCALE = 2;
+
     private final SalaryProperties salaryProperties;
 
     public JohnTravoltaLogicService(SalaryProperties salaryProperties) {
@@ -31,22 +33,34 @@ public class JohnTravoltaLogicService {
                 0
         );
 
-        BigDecimal normalSalary = salaryProperties
-                .getHourlyRate()
-                .multiply(BigDecimal.valueOf(normalHours));
+        BigDecimal hourlyRate = money(
+                salaryProperties.getHourlyRate()
+        );
 
-        BigDecimal overtimeSalary = salaryProperties
-                .getHourlyRate()
-                .multiply(salaryProperties.getOvertimeMultiplier())
-                .multiply(BigDecimal.valueOf(overtimeHours));
+        BigDecimal overtimeMultiplier =
+                salaryProperties.getOvertimeMultiplier();
 
-        BigDecimal totalSalary = normalSalary
-                .add(overtimeSalary)
-                .setScale(0, RoundingMode.HALF_UP);
+        BigDecimal normalSalary = money(
+                hourlyRate.multiply(
+                        BigDecimal.valueOf(normalHours)
+                )
+        );
 
-        BigDecimal savings = totalSalary
-                .subtract(expenses)
-                .setScale(0, RoundingMode.HALF_UP);
+        BigDecimal overtimeSalary = money(
+                hourlyRate
+                        .multiply(overtimeMultiplier)
+                        .multiply(BigDecimal.valueOf(overtimeHours))
+        );
+
+        BigDecimal totalSalary = money(
+                normalSalary.add(overtimeSalary)
+        );
+
+        BigDecimal totalExpenses = money(expenses);
+
+        BigDecimal savings = money(
+                totalSalary.subtract(totalExpenses)
+        );
 
         boolean canSave = savings.compareTo(BigDecimal.ZERO) > 0;
 
@@ -55,12 +69,12 @@ public class JohnTravoltaLogicService {
                 hoursWorked,
                 normalHours,
                 overtimeHours,
-                salaryProperties.getHourlyRate(),
-                salaryProperties.getOvertimeMultiplier(),
+                hourlyRate,
+                overtimeMultiplier,
                 normalSalary,
                 overtimeSalary,
                 totalSalary,
-                expenses,
+                totalExpenses,
                 savings,
                 canSave
         );
@@ -72,19 +86,28 @@ public class JohnTravoltaLogicService {
             BigDecimal expenses
     ) {
         if (employeeName == null || employeeName.trim().isEmpty()) {
-            throw new IllegalArgumentException("Nama karyawan wajib diisi.");
+            throw new IllegalArgumentException(
+                    "Employee name is required."
+            );
         }
 
         if (hoursWorked == null || hoursWorked < 0) {
             throw new IllegalArgumentException(
-                    "Jam kerja harus berupa angka minimal 0."
+                    "Hours worked must be zero or greater."
             );
         }
 
         if (expenses == null || expenses.compareTo(BigDecimal.ZERO) < 0) {
             throw new IllegalArgumentException(
-                    "Pengeluaran tidak boleh bernilai negatif."
+                    "Expenses cannot be negative."
             );
         }
+    }
+
+    private BigDecimal money(BigDecimal value) {
+        return value.setScale(
+                MONEY_SCALE,
+                RoundingMode.HALF_UP
+        );
     }
 }

@@ -1,10 +1,13 @@
 package com.uts;
 
+import java.math.BigDecimal;
+
 public class JohnTravoltaForm {
+
     private String inputName;
-    private double jamKerja;
-    private double upahPerJam;
-    private double pengeluaran;
+    private BigDecimal jamKerja;
+    private BigDecimal upahPerJam;
+    private BigDecimal pengeluaran;
 
     public String getInputName() {
         return inputName;
@@ -14,27 +17,27 @@ public class JohnTravoltaForm {
         this.inputName = inputName;
     }
 
-    public double getJamKerja() {
+    public BigDecimal getJamKerja() {
         return jamKerja;
     }
 
-    public void setJamKerja(double jamKerja) {
+    public void setJamKerja(BigDecimal jamKerja) {
         this.jamKerja = jamKerja;
     }
 
-    public double getUpahPerJam() {
+    public BigDecimal getUpahPerJam() {
         return upahPerJam;
     }
 
-    public void setUpahPerJam(double upahPerJam) {
+    public void setUpahPerJam(BigDecimal upahPerJam) {
         this.upahPerJam = upahPerJam;
     }
 
-    public double getPengeluaran() {
+    public BigDecimal getPengeluaran() {
         return pengeluaran;
     }
 
-    public void setPengeluaran(double pengeluaran) {
+    public void setPengeluaran(BigDecimal pengeluaran) {
         this.pengeluaran = pengeluaran;
     }
 }

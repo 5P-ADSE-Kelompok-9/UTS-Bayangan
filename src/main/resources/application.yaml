@@ -13,6 +13,6 @@ server:
 app:
   salary:
     normal-hours: 40
-    hourly-rate: 15000
+    hourly-rate: 15.00
     overtime-multiplier: 1.5
-    default-expenses: 600000
+    default-expenses: 600.00

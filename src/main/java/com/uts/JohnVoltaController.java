@@ -24,10 +24,16 @@ public class JohnVoltaController {
 
     @GetMapping({"/", "/john-volta"})
     public ModelAndView showPage() {
-        ModelAndView modelAndView = new ModelAndView("john-volta");
+        ModelAndView modelAndView =
+                new ModelAndView("john-volta");
 
         modelAndView.addObject(
-                "defaultExpenses",
+                "salaryProperties",
+                salaryProperties
+        );
+
+        modelAndView.addObject(
+                "expenses",
                 salaryProperties.getDefaultExpenses()
         );
 
@@ -40,23 +46,34 @@ public class JohnVoltaController {
             @RequestParam(required = false) Integer hoursWorked,
             @RequestParam(required = false) BigDecimal expenses
     ) {
-        ModelAndView modelAndView = new ModelAndView("john-volta");
+        ModelAndView modelAndView =
+                new ModelAndView("john-volta");
 
-        modelAndView.addObject("employeeName", employeeName);
-        modelAndView.addObject("hoursWorked", hoursWorked);
-		modelAndView.addObject("salaryProperties", salaryProperties);
+        modelAndView.addObject(
+                "salaryProperties",
+                salaryProperties
+        );
+
+        modelAndView.addObject(
+                "employeeName",
+                employeeName
+        );
+
+        modelAndView.addObject(
+                "hoursWorked",
+                hoursWorked
+        );
+
+        BigDecimal actualExpenses = expenses != null
+                ? expenses
+                : salaryProperties.getDefaultExpenses();
+
         modelAndView.addObject(
                 "expenses",
-                expenses != null
-                        ? expenses
-                        : salaryProperties.getDefaultExpenses()
+                actualExpenses
         );
 
         try {
-            BigDecimal actualExpenses = expenses != null
-                    ? expenses
-                    : salaryProperties.getDefaultExpenses();
-
             SalaryResult result = salaryService.calculate(
                     employeeName,
                     hoursWorked,
