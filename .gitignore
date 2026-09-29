@@ -1,23 +1,10 @@
-# ==========================================
-# File Build Maven
-# ==========================================
+HELP.md
 target/
-!.mvn/wrapper/maven-wrapper.jar
+.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
 
-# ==========================================
-# File Build Gradle (Jika menggunakan Gradle)
-# ==========================================
-.gradle
-build/
-!gradle/wrapper/gradle-wrapper.jar
-!**/src/main/**/build/
-!**/src/test/**/build/
-
-# ==========================================
-# Spring Tool Suite (STS) / Eclipse
-# ==========================================
+### STS ###
 .apt_generated
 .classpath
 .factorypath
@@ -25,45 +12,22 @@ build/
 .settings
 .springBeans
 .sts4-cache
-bin/
-!/.mvn/wrapper/maven-wrapper.jar
 
-# ==========================================
-# IntelliJ IDEA
-# ==========================================
+### IntelliJ IDEA ###
 .idea
 *.iws
 *.iml
 *.ipr
-out/
 
-# ==========================================
-# NetBeans
-# ==========================================
+### NetBeans ###
 /nbproject/private/
 /nbbuild/
 /dist/
 /nbdist/
 /.nb-gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
 
-# ==========================================
-# Visual Studio Code (VS Code)
-# ==========================================
+### VS Code ###
 .vscode/
-
-# ==========================================
-# File Sistem Operasi
-# ==========================================
-.DS_Store
-Thumbs.db
-
-# ==========================================
-# Lain-lain (Log, Profiling, Secrets)
-# ==========================================
-*.log
-HELP.md
-
-# Mengabaikan file konfigurasi yang mungkin berisi password/secret (Opsional tapi disarankan)
-# application-secret.properties
-# application-secret.yml
-# .env
