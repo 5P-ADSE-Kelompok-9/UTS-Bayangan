@@ -1,3 +1,18 @@
 spring:
   application:
-    name: demo
+    name: uts-bayangan
+
+  mvc:
+    view:
+      prefix: /WEB-INF/views/
+      suffix: .jsp
+
+server:
+  port: 8080
+
+app:
+  salary:
+    normal-hours: 40
+    hourly-rate: 15000
+    overtime-multiplier: 1.5
+    default-expenses: 600000
